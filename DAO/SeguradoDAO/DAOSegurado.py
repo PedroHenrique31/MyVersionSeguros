@@ -36,3 +36,6 @@ class Segurado:
         self.ses.commit()
     def __del__(self):
         self.ses.close()
+    def readByName(self,nome):
+        segurados=self.ses.query(self.segurado).filter(self.segurado.NOME.ilike('%'+nome+'%')).all()
+        return segurados
