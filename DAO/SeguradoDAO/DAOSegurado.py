@@ -1,4 +1,4 @@
- sqlalchemy import create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
 
@@ -16,7 +16,10 @@ class Segurado:
 
         session_factory = sessionmaker(bind=engine)
         self.ses = session_factory()
-
+    def readAllTelefoneToo(self):
+        consulta=self.ses.query(self.segurado,self.telefone.DDD,self.telefone.TELEFONE).\
+            join(self.telefone).filter(self.segurado.COD==self.telefone.COD_SEGURADO).all()
+        return consulta
     def readAll(self):
         segurados=self.ses.query(self.segurado).all()
         return segurados
