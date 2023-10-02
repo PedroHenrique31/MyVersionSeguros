@@ -26,10 +26,12 @@ class Segurado:
         return telefones
     # Lista endereços de um determinado segurado
     def readEnderecos(self,id_segurado):
-        pass
+        enderecos=self.ses.query(self.endereco).filter_by(COD_SEGURADO=id_segurado)
+        return enderecos
     # Lista emails de um determinado segurado
     def readEmail(self,id_segurado):
-        pass
+        emails=self.ses.query(self.email).filter_by(COD_SEGURADO=id_segurado)
+        return emails
     # Lista todos os segurados
     def readAll(self):
         segurados=self.ses.query(self.segurado).all()
