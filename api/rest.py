@@ -60,7 +60,24 @@ class ProdutorRest(Resource):
     def __init__(self):
         self.campos=['COD','NOME']
     def get(self):
-        pass
+        ## Se a solicitação de get passar como argumento o campo COD, chama a função readByID
+        if request.args.get(self.campos[0]) is not None:
+            id_produtor=request.args.get(self.campos[0])
+            obj=dados_Produtor.readByID(id_produtor)
+            schema=ProdutorSchema() # cria um schema com a tabela produtor
+            algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num hash
+            return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
+        ## Se a solicitação passar como argumento o campo NOME, chama a função readByName.
+        elif request.args.get("NOME") is not None:
+            lista = dados_Produtor.readByName(request.args.get("NOME")) # consulta por nome
+            schema=ProdutorSchema(many=True) # chama a classe esquema avisando que haverá uma lista de dados a serem formatados.
+            return jsonify(schema.dump(lista)) # gera o JSON da lista toda.
+        ## Se a solicitação não passar nenhum argumento, chama a função readAll.
+        else:
+            lista=dados_Produtor.readAll()
+            schema=ProdutorSchema(many=True)
+            return jsonify(schema.dump(lista))
+
     def post(self):
         pass
     def put(self):
