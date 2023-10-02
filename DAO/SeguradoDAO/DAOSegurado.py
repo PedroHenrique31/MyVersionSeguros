@@ -20,9 +20,21 @@ class Segurado:
         consulta=self.ses.query(self.segurado,self.telefone.DDD,self.telefone.TELEFONE).\
             join(self.telefone).filter(self.segurado.COD==self.telefone.COD_SEGURADO).all()
         return consulta
+    # Lista telefones de um determinado segurado
+    def readTelefone(self,id_segurado):
+        telefones=self.ses.query(self.telefone).filter_by(COD_SEGURADO=id_segurado)
+        return telefones
+    # Lista endereços de um determinado segurado
+    def readEnderecos(self,id_segurado):
+        pass
+    # Lista emails de um determinado segurado
+    def readEmail(self,id_segurado):
+        pass
+    # Lista todos os segurados
     def readAll(self):
         segurados=self.ses.query(self.segurado).all()
         return segurados
+    # Acessa um segurado pelo seu ID
     def readById(self,id):
         segurado=self.ses.query(self.segurado).filter_by(COD=id).first()
         return  segurado
@@ -36,6 +48,7 @@ class Segurado:
         self.ses.commit()
     def __del__(self):
         self.ses.close()
+    # retorna uma lista de segurados buscando-os pelo nome
     def readByName(self,nome):
         segurados=self.ses.query(self.segurado).filter(self.segurado.NOME.ilike('%'+nome+'%')).all()
         return segurados
