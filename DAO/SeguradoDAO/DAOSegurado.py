@@ -1,3 +1,10 @@
+"""
+            Classe DAO Segurado
+        Nessa classe vamos acessar e manipular dados das tabelas de Segurado e
+    de suas tabelas correlatas tais como: endereço,email e telefone.
+
+    author:Pedro Henrique Carneiro de Araújo
+"""
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker

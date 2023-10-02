@@ -1,3 +1,10 @@
+"""
+            Classe DAO Apolice
+        Nessa classe vamos acessar e manipular dados das tabelas de Apolice e
+    quem sabe algumas tabelas correlatas tais como produtor e segurado.
+
+    author:Pedro Henrique Carneiro de Araújo
+"""
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker

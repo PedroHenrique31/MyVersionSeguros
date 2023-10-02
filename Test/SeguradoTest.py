@@ -1,3 +1,4 @@
+
 from DAO.SeguradoDAO import DAOSegurado
 from datetime import date
 
