@@ -24,10 +24,18 @@ from DAO.ProdutorDAO import ProdutorDAO # Importamos o pacote e pacote do pacote
 from DAO.SeguradoDAO import DAOSegurado
 from DAO.ApoliceDAO import DAOApolice
 
+# Cria classes de acesso ao BD, para manipular as tabelas de produtor,segurado e apolices.
 dados_Produtor=ProdutorDAO.Produtor()
 dados_Segurado=DAOSegurado.Segurado()
 dados_Apolice=DAOApolice.Apolice()
 
+"""
+    Cria classes de esquema, essas classes servem para declararmos os 
+modelos de dados a serem manipulados no BD, com isso ao declararmos as 
+classes Meta e passarmos uma tabela do BD como model, o SQLAlchemySchema 
+vai saber os campos que temos na tabela e com isso pode serializar e 
+desserializar os objetos do BD.
+"""
 class ProdutorSchema(SQLAlchemyAutoSchema):
     class Meta:
         model=dados_Produtor.produtor
@@ -37,3 +45,25 @@ class SeguradoSchema(SQLAlchemyAutoSchema):
 class ApoliceSchema(SQLAlchemyAutoSchema):
     class Meta:
         model=dados_Apolice.apolice
+
+"""
+    Cria classes de recursos REST, nessas classes criamos os 
+recursos que vamos utilizar para responder as solicitações HTTP
+vindos do usuário, e serializamos e desserializamos.
+nela usamos as classes dao e implementamos respostas aos verbos:
+    -get;
+    -post;
+    -put;
+    -delete;
+"""
+class ProdutorRest(Resource):
+    def __init__(self):
+        self.campos=['COD','NOME']
+    def get(self):
+        pass
+    def post(self):
+        pass
+    def put(self):
+        pass
+    def delete(self):
+        pass
