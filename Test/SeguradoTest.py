@@ -11,7 +11,7 @@ def testeLerUnico():
     pessoas=dao.readById(65556)
     print("COD: " + str(pessoas.COD) + " NOME: " + pessoas.NOME)
 def testeBuscarNome():
-    nome = "GLAUCIA"
+    nome = "IANO"
     segurado=dao.readByName(nome)
     for c in segurado:
         print("COD: "+str(c.COD)+" Nome: "+c.NOME)
@@ -36,7 +36,7 @@ def testeExcluir():
     pessoa=dao.readById(6556)
     dao.delete(pessoa)
 def testeTelefone():
-    id=5870
+    id=5857
     segurado=dao.readById(id)
     telefones=dao.readTelefone(id)
     print("Nome: "+segurado.NOME+" trabalha em: "+str(segurado.EMPRESA)+"\ntelefones: ",end="")
@@ -47,7 +47,7 @@ def testeTelefone():
             print("Não tem telefone na lista")
     print("\n")
 def testeEndereco():
-    id=5870
+    id=5662
     segurado=dao.readById(id)
     telefones=dao.readEnderecos(id)
     print("Nome: "+segurado.NOME+" trabalha em: "+str(segurado.EMPRESA)+"\nendereços: ",end="")
@@ -59,7 +59,7 @@ def testeEndereco():
             print("Não tem endereço na lista")
     print("\n")
 def testeEmail():
-    id=5870
+    id=5662
     segurado=dao.readById(id)
     telefones=dao.readEmail(id)
     print("Nome: "+segurado.NOME+" trabalha em: "+str(segurado.EMPRESA)+"\ne-mails: ",end="")
