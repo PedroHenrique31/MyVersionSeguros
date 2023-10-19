@@ -59,6 +59,7 @@ nela usamos as classes dao e implementamos respostas aos verbos:
 class ProdutorRest(Resource):
     def __init__(self):
         self.campos=['COD','NOME']
+    # Lê dados do BD
     def get(self):
         ## Se a solicitação de get passar como argumento o campo COD, chama a função readByID
         if request.args.get(self.campos[0]) is not None:
@@ -77,10 +78,29 @@ class ProdutorRest(Resource):
             lista=dados_Produtor.readAll()
             schema=ProdutorSchema(many=True)
             return jsonify(schema.dump(lista))
-
+    # Cria um novo elemento no BD.
     def post(self):
-        pass
+        obj=dados_Produtor.produtor() # cria um objeto do tipo produtor
+        obj.NOME=request.args.get("NOME")
+        dados_Produtor.create(obj)
+        return jsonify({'insert':obj.COD})
+    # Atualiza dados no BD.
     def put(self):
-        pass
+        obj = dados_Produtor.readByID(request.args.get(self.campos[0]))
+        if obj is None:
+            return jsonify({'update':0})
+        else:
+            for c in self.campos:
+                if request.args.get(c) is not None:
+                    exec('obj.{}=request.args.get("{}")'.format(c, c))
+                    dados_Produtor.update()
+                    return jsonify({'update':obj.COD})
+    # Exclui dados no BD.
     def delete(self):
-        pass
+        id=request.args.get(self.campos[0])
+        obj = dados_Produtor.readByID(id)
+        if obj is None:
+            return jsonify({"delete":0})
+        else:
+            dados_Produtor.delete(obj)
+            return jsonify({"delete":id})
