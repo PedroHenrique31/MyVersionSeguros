@@ -51,10 +51,10 @@ class ApoliceSchema(SQLAlchemyAutoSchema):
 recursos que vamos utilizar para responder as solicitações HTTP
 vindos do usuário, e serializamos e desserializamos.
 nela usamos as classes dao e implementamos respostas aos verbos:
-    -get;
-    -post;
-    -put;
-    -delete;
+    -get: Lê dados;
+    -post: Cria um novo elemento;
+    -put: Atualiza os dados;
+    -delete: Exclui dados.
 """
 class ProdutorRest(Resource):
     def __init__(self):
@@ -104,3 +104,24 @@ class ProdutorRest(Resource):
         else:
             dados_Produtor.delete(obj)
             return jsonify({"delete":id})
+class ApoliceRest(Resource):
+    def __init__(self):
+        self.campos=['COD','SEGURADORA','RAMO','INIVIGOR','FIMVIGOR','PRODUTO',
+                     'LINK_APOLICE','COD_PRODUTOR','COD_SEGURADO','premio_liquido',
+                     'premio_total']
+
+    # Lê dados do BD
+    def get(self):
+        pass
+
+    # Cria um novo elemento no BD.
+    def post(self):
+        self
+
+    # Atualiza dados no BD.
+    def put(self):
+        pass
+
+    # Exclui dados no BD.
+    def delete(self):
+        pass
