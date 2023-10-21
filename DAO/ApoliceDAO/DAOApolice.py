@@ -25,7 +25,7 @@ class Apolice:
     def readAll(self):
         apolices=self.ses.query(self.apolice).all()
         return apolices
-    def readById(self,id):
+    def readByID(self,id):
         apolice = self.ses.query(self.apolice).filter_by(COD=id).first()
         return apolice
     def create(self,apolice):

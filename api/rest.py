@@ -17,6 +17,7 @@
 
     author:Pedro Henrique Carneiro de Araújo
 """
+import os
 from flask_restful import Resource, request
 from flask import jsonify
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
@@ -112,7 +113,23 @@ class ApoliceRest(Resource):
 
     # Lê dados do BD
     def get(self):
-        pass
+        ## Se a solicitação de get passar como argumento o campo COD, chama a função readByID
+        #TODO:Aqui que terei que enviar o arquivo .pdf da apolice.
+        if request.args.get(self.campos[0]) is not None:
+            id_apolice=request.args.get(self.campos[0])
+            obj=dados_Apolice.readByID(id_apolice)
+            schema=ApoliceSchema() # cria um schema com a tabela apolice
+            algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num hash
+            return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
+        ## Se a solicitação passar como argumento algum campo conhecido de pesquisa.
+        elif request.args.get("NOME") is not None:
+            lista =[]
+            pass
+        ## Se a solicitação não passar nenhum argumento, chama a função readAll.
+        else:
+            lista=dados_Apolice.readAll()
+            schema=ApoliceSchema(many=True)
+            return jsonify(schema.dump(lista))
 
     # Cria um novo elemento no BD.
     def post(self):
