@@ -93,7 +93,7 @@ class ProdutorRest(Resource):
         else:
             for c in self.campos:
                 if request.args.get(c) is not None:
-                    exec('obj.{}=request.args.get("{}")'.format(c, c))
+                    exec('obj.{} =request.args.get("{}")'.format(c, c))
                     dados_Produtor.update()
                     return jsonify({'update':obj.COD})
     # Exclui dados no BD.
@@ -133,12 +133,31 @@ class ApoliceRest(Resource):
 
     # Cria um novo elemento no BD.
     def post(self):
-        self
+        obj=dados_Apolice.apolice() # cria um objeto do tipo apolice
+        for c in self.campos:
+            if c!='COD':
+                exec("obj.{}=request.args.get('{}')".format(c,c))
+        dados_Apolice.create(obj)
+        return jsonify({'insert':obj.COD})
 
     # Atualiza dados no BD.
     def put(self):
-        pass
+        obj = dados_Apolice.readByID(request.args.get(self.campos[0]))
+        if obj is None:
+            return jsonify({'update':0})
+        else:
+            for c in self.campos:
+                if request.args.get(c) is not None:
+                    exec('obj.{}=request.args.get("{}")'.format(c, c))
+                    dados_Produtor.update()
+                    return jsonify({'update':obj.COD})
 
     # Exclui dados no BD.
     def delete(self):
-        pass
+        id=request.args.get(self.campos[0])
+        obj = dados_Apolice.readByID(id)
+        if obj is None:
+            return jsonify({"delete":0})
+        else:
+            dados_Apolice.delete(obj)
+            return jsonify({"delete":id})
