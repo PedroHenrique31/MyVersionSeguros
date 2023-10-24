@@ -230,7 +230,7 @@ class PDFHandler:
     def download_pdf(self, filename):
         pdf_path = os.path.join(self.pdf_directory, filename+".pdf")
         if os.path.exists(pdf_path) and pdf_path.endswith('.pdf'):
-            return send_file(pdf_path, as_attachment=True)
+            return send_file(pdf_path, as_attachment=False)
         else:
             return 'Arquivo PDF não encontrado', 404
 
