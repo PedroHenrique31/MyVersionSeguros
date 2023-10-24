@@ -19,7 +19,7 @@
 """
 import os
 from flask_restful import Resource, request
-from flask import jsonify
+from flask import jsonify,send_file
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from DAO.ProdutorDAO import ProdutorDAO # Importamos o pacote e pacote do pacote após isso o arquivo ProdutorDAO
 from DAO.SeguradoDAO import DAOSegurado
@@ -223,3 +223,17 @@ class SeguradoRest(Resource):
         else:
             dados_Segurado.delete(obj)
             return jsonify({"delete":id})
+
+class PDFHandler:
+    def __init__(self):
+        self.pdf_directory="C:\\Users\\pedro\\Documents\\Site\\Apolice_Seguros_2023\\"
+    def download_pdf(self, filename):
+        pdf_path = os.path.join(self.pdf_directory, filename+".pdf")
+        if os.path.exists(pdf_path) and pdf_path.endswith('.pdf'):
+            return send_file(pdf_path, as_attachment=True)
+        else:
+            return 'Arquivo PDF não encontrado', 404
+
+    def upload_pdf(self):
+        # Função vazia para lidar com o upload de arquivos PDF
+        pass
