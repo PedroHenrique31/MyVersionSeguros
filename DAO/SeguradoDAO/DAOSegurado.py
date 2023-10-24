@@ -44,7 +44,7 @@ class Segurado:
         segurados=self.ses.query(self.segurado).all()
         return segurados
     # Acessa um segurado pelo seu ID
-    def readById(self,id):
+    def readByID(self,id):
         segurado=self.ses.query(self.segurado).filter_by(COD=id).first()
         return  segurado
     def create(self,segurado):
