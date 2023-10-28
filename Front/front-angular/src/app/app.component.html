@@ -1,0 +1,19 @@
+<h1>Programa da Tabuada</h1>
+<hr/>
+
+
+<button (click)="aumentar()"> + (Adicionar) </button>
+&nbsp;
+<button (click)="diminuir()"> - (Diminuir) </button>
+
+
+<hr/>
+
+
+<h1>Tabuada do número {{ numero }}</h1>
+<br>
+<ul>
+  <li *ngFor="let n of repete(11); let ind = index"> 
+    {{ numero }} x {{ ind }} = {{ numero * ind }}
+  </li>
+</ul>
