@@ -1,3 +1,4 @@
+/* Já nessa temos os códigos propriamente ditos. */
 import { Component } from '@angular/core';
 
 

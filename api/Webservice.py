@@ -1,10 +1,17 @@
 from flask import Flask,request,send_file
+from flask_cors import CORS
 from flask_restful import Api
 import rest
 from rest import PDFHandler
 import os
 
+
 app=Flask(__name__)
+# Configurar CORS para permitir solicitações de http://localhost:4200 (ou seu domínio Angular)
+"""
+CORS(app, resources={r"/*": {"origins": "http://localhost:4200"}})
+"""
+# Resto da configuração
 api=Api(app)
 
 api.add_resource(rest.ProdutorRest,'/produtor',endpoint='produtores')
