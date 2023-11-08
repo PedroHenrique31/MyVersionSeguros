@@ -1,6 +1,4 @@
-/* Já nessa temos os códigos propriamente ditos. */
 import { Component } from '@angular/core';
-
 
 @Component({
   selector: 'app-root',
@@ -8,22 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  numero : number = 1;
-
-
-  aumentar(){
-    this.numero ++;
-  }
-
-
-  diminuir(){
-    this.numero --;
-  }
-
-
-  repete(n: number): Array<number> {
-    return Array(n);
-  }
-
-
+  title = 'projeto-front';
 }
