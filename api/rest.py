@@ -46,6 +46,9 @@ class SeguradoSchema(SQLAlchemyAutoSchema):
 class ApoliceSchema(SQLAlchemyAutoSchema):
     class Meta:
         model=dados_Apolice.apolice
+        fields = ('COD','SEGURADORA','RAMO','INIVIGOR','FIMVIGOR','PRODUTO',
+                     'LINK_APOLICE','COD_PRODUTOR','COD_SEGURADO','premio_liquido',
+                     'premio_total')
 
 """
     Cria classes de recursos REST, nessas classes criamos os 
@@ -115,12 +118,11 @@ class ApoliceRest(Resource):
     # Lê dados do BD
     def get(self):
         ## Se a solicitação de get passar como argumento o campo COD, chama a função readByID
-        #TODO:Aqui que terei que enviar o arquivo .pdf da apolice.
         if request.args.get(self.campos[0]) is not None:
             id_apolice=request.args.get(self.campos[0])
             obj=dados_Apolice.readByID(id_apolice)
             schema=ApoliceSchema() # cria um schema com a tabela apolice
-            algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num hash
+            algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num dicionario
             return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
         ## Se a solicitação passar como argumento algum campo conhecido de pesquisa.
         elif request.args.get("") is not None:

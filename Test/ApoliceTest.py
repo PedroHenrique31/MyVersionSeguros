@@ -21,7 +21,7 @@ def testeAdicionar():
 
     dao.create(novaApolice)
 def testeLerUnico():
-    apolice=dao.readById(10036)
+    apolice=dao.readByID(762)
     print("COD: "+str(apolice.COD)+" Seguradora: "+apolice.SEGURADORA+" COD_PRODUTOR: "+
           str(apolice.COD_PRODUTOR)+" premio_liquido: "+str(apolice.premio_liquido))
 
