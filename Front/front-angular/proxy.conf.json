@@ -1,0 +1,26 @@
+{
+  "/api/produtor": {
+    "target": "http://127.0.0.1:5000",
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": { "^/api/produtor": "/produtor" }
+  },
+  "/api/apolice": {
+    "target": "http://127.0.0.1:5000",
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": { "^/api/apolice": "/apolice" }
+  },
+  "/api/segurado":{
+    "target":"http://127.0.0.1:5000",
+    "secure":false,
+    "logLevel":"debug",
+    "pathRewrite":{"^/api/segurado":"/segurado"}
+  },
+  "/api/download_apolice/**":{
+    "target":"http://127.0.0.1:5000",
+    "secure":false,
+    "logLevel":"debug",
+    "pathRewrite":{"^/api/download_apolice":"/download_pdf"}
+  }
+}

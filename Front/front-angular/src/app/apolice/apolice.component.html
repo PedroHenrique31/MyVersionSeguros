@@ -1,0 +1,36 @@
+<p>apolice works!</p>
+
+Vou mostrar apenas de uma apolice 
+<p>
+{{apolices[0].COD}} <br>
+{{apolices[0].seguradora}} <br>
+{{apolices[0].inivigor | date:'dd/MM/yyyy'}} <br>
+{{apolices[0].fimvigor}} <br>
+</p>
+
+
+<a [href]="'http://localhost:4200/api/download_apolice?filename=COMPROVANTE_RESIDENCIA'" target="_blank">
+  Visualizar PDF</a>
+
+
+<!-- Adicione uma div para exibir os detalhes da apólice -->
+<div *ngIf="apoliceSelecionada">
+  apolice selecionada:<br>
+  <!-- Adicione outros detalhes da apólice conforme necessário -->
+</div>
+<!-- Cria uma lista desordenada com os nomes e CODs dos funcionarios -->
+<div>
+<ul>
+    Lista de apólices:
+    <li *ngFor="let item of apolices">
+      {{item.COD }} - {{item.seguradora}} - {{item.fimvigor | date:'dd/MM/yyyy' }} 
+    </li>
+</ul>
+</div>
+
+
+</div>
+
+
+
+

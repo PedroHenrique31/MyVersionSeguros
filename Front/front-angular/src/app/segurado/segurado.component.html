@@ -1,0 +1,17 @@
+<p>segurado works!</p>
+
+
+<p>
+    {{segurados[0].COD}} <br>
+    {{segurados[0].NOME}} <br>
+    {{segurados[0].dataNascimento}} <br>
+    {{segurados[0].renda}} <br>
+</p>
+<!-- Cria uma lista desordenada com os nomes e CODs dos funcionarios -->
+<ul>
+    Lista de apólices:
+    <li *ngFor="let item of segurados">
+           {{item.COD }} - {{item.NOME}} - {{item.dataNascimento | date:'dd/MM/yyyy' }} - {{item.renda}} - {{item.empresa}}
+        </li>
+    </ul>
+    
