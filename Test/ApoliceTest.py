@@ -22,6 +22,7 @@ def testeAdicionar():
     dao.create(novaApolice)
 def testeLerUnico():
     apolice=dao.readByID(762)
+    print("FIMVIGOR: "+str(apolice.FIMVIGOR)+" mes: "+str(apolice.FIMVIGOR.month))
     print("COD: "+str(apolice.COD)+" Seguradora: "+apolice.SEGURADORA+" COD_PRODUTOR: "+
           str(apolice.COD_PRODUTOR)+" premio_liquido: "+str(apolice.premio_liquido))
 
@@ -33,9 +34,16 @@ def testeAlterar():
     apolice=dao.readById(10036)
     apolice.premio_liquido=0.0
     dao.update()
+def testeListarApolicesMES():
+    APOLICES=dao.listaApolicesVencendo("08")
+
+    for c in APOLICES:
+        print("COD: "+str(c.COD)+" FIMVIGOR: "+str(c.FIMVIGOR))
+
 #testeAdicionar() #OK
-testeLer() #OK
+#testeLer() #OK
 #testeBuscarNome() #Essa função não tem na apolice, farei de outro jeito
 testeLerUnico() #OK
 #testeAlterar() #OK
 #testeExcluir() #OK
+#testeListarApolicesMES()#OK

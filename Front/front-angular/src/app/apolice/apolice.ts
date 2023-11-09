@@ -7,5 +7,7 @@ export interface Apolice{
     ramo:string,
     seguradora:string,
     premioLiquido:number,
-    premioTotal:number
+    premioTotal:number,
+    cod_segurado:number,
+    cod_produtor:number
 }

@@ -8,6 +8,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import text
 
 class Apolice:
     def __init__(self):
@@ -38,3 +39,8 @@ class Apolice:
         self.ses.commit()
     def __del__(self):
         self.ses.close()
+    def listaApolicesVencendo(self,mes):
+        clausula="month(FIMVIGOR)="+mes
+        print(clausula)
+        apolices=self.ses.query(self.apolice).where(text(clausula))
+        return apolices

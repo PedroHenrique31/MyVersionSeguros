@@ -28,7 +28,10 @@ export class ApoliceService {
           ramo: item.RAMO,
           seguradora: item.SEGURADORA,
           premioLiquido: parseFloat(item.premio_liquido),
-          premioTotal: parseFloat(item.premio_total)
+          premioTotal: parseFloat(item.premio_total),
+          cod_segurado:item.COD_SEGURADO,
+          cod_produtor:item.COD_PRODUTOR
+
         }));
       })
     );

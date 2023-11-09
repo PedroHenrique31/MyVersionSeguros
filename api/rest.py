@@ -125,9 +125,15 @@ class ApoliceRest(Resource):
             algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num dicionario
             return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
         ## Se a solicitação passar como argumento algum campo conhecido de pesquisa.
-        elif request.args.get("") is not None:
+        elif request.args.get("MESVENCIMENTO") is not None:
             lista =[]
-            pass
+            mesVencimento=request.args.get("MESVENCIMENTO")
+            lista=dados_Apolice.listaApolicesVencendo(mesVencimento)
+            schema=ApoliceSchema(many=True)
+            algo=schema.dump(lista)
+            print("entrou na busca por apolices vencendo")
+            return jsonify(algo)
+
         ## Se a solicitação não passar nenhum argumento, chama a função readAll.
         else:
             lista=dados_Apolice.readAll()
