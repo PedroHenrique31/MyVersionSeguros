@@ -2,40 +2,70 @@
 
 <label>Pesquise por uma apolice </label>
 <form>
-
+  <select name="campo">
+    <option value="seguradora">Seguradora</option>
+    <option value="fimvigor">Fim de Vigência</option>
+    <option value="segurado">Segurado</option>
+    <option value="premio">Prêmio</option>
+  </select>
+  <input type="text" name="valor" />
+  <input type="submit" value="Pesquisar" />
 </form>
+<!--
 <div>
 Vou mostrar apenas de uma apolice 
 <p>
-{{apolices[0].COD}} <br>
-{{apolices[0].seguradora}} <br>
-{{apolices[0].inivigor | date:'dd/MM/yyyy'}} <br>
-{{apolices[0].fimvigor | date:'dd/MM/yyyy'}} <br>
-{{apolices[0].linkApolice}} <br>
-{{apolices[0].premioLiquido}} <br>
-{{apolices[0].premioTotal}} <br>
-{{apolices[0].ramo}} <br>
-{{apolices[0].produto}} <br>
-{{apolices[0].cod_produtor}} <br>
-{{apolices[0].cod_segurado}} <br>
+{{apoliceEspecifica.COD}} <br>
+{{apoliceEspecifica.seguradora}} <br>
+{{apoliceEspecifica.inivigor | date:'dd/MM/yyyy'}} <br>
+{{apoliceEspecifica.fimvigor | date:'dd/MM/yyyy'}} <br>
+{{apoliceEspecifica.linkApolice}} <br>
+{{apoliceEspecifica.premioLiquido}} <br>
+{{apoliceEspecifica.premioTotal}} <br>
+{{apoliceEspecifica.ramo}} <br>
+{{apoliceEspecifica.produto}} <br>
+{{apoliceEspecifica.cod_produtor}} <br>
+{{apoliceEspecifica.cod_segurado}} <br>
 
 </p>
-</div>
+</div>-->
 
+Tirar isso daqui heim!
 <a [href]="'http://localhost:4200/api/download_apolice?filename=pedro_henrique_apolice'" target="_blank">
-  Visualizar PDF</a>
+  Visualizar PDF</a> 
 
 <!-- Cria uma lista desordenada com os nomes e CODs dos funcionarios -->
-<div>
-<ul>
-    Lista de apólices:
-    <li *ngFor="let item of apolices">
-      {{item.COD }} - {{item.seguradora}} - {{item.fimvigor | date:'dd/MM/yyyy' }} 
-    </li>
-</ul>
+<span style="display:flex;">
+<div style="flex-grow: 1;">
+  <table>
+    <caption>Lista de apólices vencendo no mês</caption>
+    <th>Seguradora</th>
+    <th>Ramo</th>
+    <th>Produto</th>
+    <th>Inicio</th>
+    <th>Fim</th>
+    <th>Premio Líquido</th>
+    <th>Segurado</th>
+    <th>Apolice</th>
+
+    <tr *ngFor="let item of apolices">
+      <td>{{item.seguradora}}</td>
+      <td>{{item.ramo}}</td>
+      <td>{{item.produto}}</td>
+      <td>{{item.inivigor | date:'dd/MM/yyyy'}}</td>
+      <td>{{item.fimvigor | date:'dd/MM/yyyy' }}</td>
+      <td>{{item.premioLiquido}}</td>
+      <td>{{item.cod_segurado}}</td>
+    
+    </tr>
+  </table>
+</div>  
+
+<div style="flex-grow: 1;">
+  <p><strong>
+  Imprimir algumas estatísticas das apolices do mes {{mes}} aqui</strong></p>
 </div>
-
-
+</span>
 
 
 

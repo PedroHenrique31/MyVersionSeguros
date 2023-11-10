@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule} from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatCommonModule } from '@angular/material/core';
+import { ActivatedRoute } from '@angular/router';
 
 // import dos componentes que serão usados na aplicação em geral
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { ApoliceComponent } from './apolice/apolice.component';
 import { SeguradoComponent } from './segurado/segurado.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ApoliceDetailComponent } from './apolice-detail/apolice-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 //import { PDFViewerModule } from 'ngx-extended-pdf-viewer';
 //import { VisualizarPdfComponent } from './visualizar-pdf-component/visualizar-pdf-component.component';
 
@@ -21,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProdutorComponent,
     ApoliceComponent,
     SeguradoComponent,
+    ApoliceDetailComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
