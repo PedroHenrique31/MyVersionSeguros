@@ -47,7 +47,7 @@ class ApoliceSchema(SQLAlchemyAutoSchema):
     class Meta:
         model=dados_Apolice.apolice
         fields = ('COD','SEGURADORA','RAMO','INIVIGOR','FIMVIGOR','PRODUTO',
-                     'LINK_APOLICE','COD_PRODUTOR','COD_SEGURADO','premio_liquido',
+                     'LINK_APOLICE','COD_PRODUTOR','NOME_PROD','COD_SEGURADO','premio_liquido',
                      'premio_total')
 
 """

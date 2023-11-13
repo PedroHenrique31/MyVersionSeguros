@@ -11,24 +11,7 @@
   <input type="text" name="valor" />
   <input type="submit" value="Pesquisar" />
 </form>
-<!--
-<div>
-Vou mostrar apenas de uma apolice 
-<p>
-{{apoliceEspecifica.COD}} <br>
-{{apoliceEspecifica.seguradora}} <br>
-{{apoliceEspecifica.inivigor | date:'dd/MM/yyyy'}} <br>
-{{apoliceEspecifica.fimvigor | date:'dd/MM/yyyy'}} <br>
-{{apoliceEspecifica.linkApolice}} <br>
-{{apoliceEspecifica.premioLiquido}} <br>
-{{apoliceEspecifica.premioTotal}} <br>
-{{apoliceEspecifica.ramo}} <br>
-{{apoliceEspecifica.produto}} <br>
-{{apoliceEspecifica.cod_produtor}} <br>
-{{apoliceEspecifica.cod_segurado}} <br>
 
-</p>
-</div>-->
 
 Tirar isso daqui heim!
 <a [href]="'http://localhost:4200/api/download_apolice?filename=pedro_henrique_apolice'" target="_blank">
@@ -56,15 +39,21 @@ Tirar isso daqui heim!
       <td>{{item.fimvigor | date:'dd/MM/yyyy' }}</td>
       <td>{{item.premioLiquido}}</td>
       <td>{{item.cod_segurado}}</td>
+      <td> <a routerLink="/apolices/{{item.COD}}">detalhes</a></td>
     
     </tr>
   </table>
 </div>  
 
+<!--
 <div style="flex-grow: 1;">
   <p><strong>
   Imprimir algumas estatísticas das apolices do mes {{mes}} aqui</strong></p>
-</div>
+</div>-->
+<aside>
+  <p><strong>
+    Imprimir algumas estatísticas das apolices do mes {{mes}} aqui</strong></p>
+</aside>
 </span>
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apolice } from '../apolice/apolice';
-import {Observable } from 'rxjs';
+import {Observable, Subscriber } from 'rxjs';
 import { HttpClient } from  '@angular/common/http';
 import { map } from 'rxjs/operators';
 
@@ -19,7 +19,25 @@ export class ApoliceService {
   //TODO:DESCOBRIR COMO ISSO FUNCIONA E pegar uma apolice por vez
   getOne(codigo:number):Observable<Apolice>{
     let url_Final=this.url+"?COD="+codigo;console.log("Url_final: "+url_Final);
-    return this._http.get<Apolice>(url_Final);
+    return this._http.get<any>(url_Final).pipe(
+      map((data:any) => {
+        const apol:Apolice={
+          COD:data.COD,
+          inivigor:new Date(data.INIVIGOR),
+          fimvigor: new Date(data.FIMVIGOR),
+          linkApolice:data.LINK_APOLICE,
+          produto:data.PRODUTO,
+          ramo:data.RAMO,
+          seguradora:data.SEGURADORA,
+          premioLiquido:parseFloat(data.premio_liquido),
+          premioTotal:parseFloat(data.premio_total),
+          cod_segurado:data.COD_SEGURADO,
+          cod_produtor:data.COD_PRODUTOR
+        };//fim apol
+        return apol;
+    })
+
+    );//fim pipe()
   }
   //TODO: Essa função conecta com a API para buscar uma lista igual getAll, retorna Observable
   getByMes(mes:number):Observable<Apolice[]>{
