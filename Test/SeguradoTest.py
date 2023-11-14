@@ -37,7 +37,7 @@ def testeExcluir():
     dao.delete(pessoa)
 def testeTelefone():
     id=5857
-    segurado=dao.readById(id)
+    segurado=dao.readByID(id)
     telefones=dao.readTelefone(id)
     print("Nome: "+segurado.NOME+" trabalha em: "+str(segurado.EMPRESA)+"\ntelefones: ",end="")
     for c in telefones:
@@ -48,7 +48,7 @@ def testeTelefone():
     print("\n")
 def testeEndereco():
     id=5662
-    segurado=dao.readById(id)
+    segurado=dao.readByID(id)
     telefones=dao.readEnderecos(id)
     print("Nome: "+segurado.NOME+" trabalha em: "+str(segurado.EMPRESA)+"\nendereços: ",end="")
     for c in telefones:
@@ -60,7 +60,7 @@ def testeEndereco():
     print("\n")
 def testeEmail():
     id=5662
-    segurado=dao.readById(id)
+    segurado=dao.readByID(id)
     telefones=dao.readEmail(id)
     print("Nome: "+segurado.NOME+" trabalha em: "+str(segurado.EMPRESA)+"\ne-mails: ",end="")
     for c in telefones:

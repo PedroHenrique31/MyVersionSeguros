@@ -29,7 +29,7 @@ class Segurado:
         return consulta
     # Lista telefones de um determinado segurado
     def readTelefone(self,id_segurado):
-        telefones=self.ses.query(self.telefone).filter_by(COD_SEGURADO=id_segurado)
+        telefones=self.ses.query(self.telefone).filter_by(COD_SEGURADO=id_segurado).all()
         return telefones
     # Lista endereços de um determinado segurado
     def readEnderecos(self,id_segurado):
@@ -41,11 +41,11 @@ class Segurado:
         return emails
     # Lista todos os segurados
     def readAll(self):
-        segurados=self.ses.query(self.segurado).all()
+        segurados=self.ses.query(self.segurado).limit(200).all()
         return segurados
     # Acessa um segurado pelo seu ID
     def readByID(self,id):
-        segurado=self.ses.query(self.segurado).filter_by(COD=id).first()
+        segurado= self.ses.query(self.segurado).filter_by(COD=id).first()
         return  segurado
     def create(self,segurado):
         self.ses.add(segurado)

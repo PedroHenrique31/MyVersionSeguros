@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable } from 'rxjs';
 import { HttpClient } from  '@angular/common/http';
 import { Segurado } from '../segurado/segurado';
+import { SeguradoDetalhes, Telefone } from '../segurado-detail/segurado-detail';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -30,10 +31,56 @@ export class SeguradoService {
         }))} ));
    }// Fim getAll
 
-   getOne(cod:number):Observable<Segurado>{
-    let urlFinal=this.url+"?COD="+cod;
-    return this._http.get<Segurado>(urlFinal);
 
-    //Acessa o banco e retorna um segurado;
-   }
+
+  getOne(cod: number): Observable<SeguradoDetalhes> {
+    console.log("Chamou a função getOne");
+    let urlFinal = this.url + "?COD=" + cod;
+    return this._http.get<any>(urlFinal).pipe(
+      map(data => {
+        const seguradoDetalhes: SeguradoDetalhes = new SeguradoDetalhes();
+        seguradoDetalhes.COD = data.COD;
+        seguradoDetalhes.NOME = data.NOME;
+        seguradoDetalhes.CPF = data.CPF;
+        seguradoDetalhes.RG = data.RG;
+        seguradoDetalhes.profissao = data.PROFISSAO;
+        seguradoDetalhes.empresa = data.EMPRESA;
+        seguradoDetalhes.renda = data.RENDA;
+        seguradoDetalhes.dataNascimento = data.DATA_NASCIMENTO ? new Date(data.DATA_NASCIMENTO) : new Date('1901-01-01');
+        seguradoDetalhes.Obs = data.OBSERVACAO;
+
+        // Mapear Telefones
+        if (data.TELEFONES) {
+          seguradoDetalhes.telefones = data.TELEFONES.map((tel:any) => ({
+            DDD: tel.DDD,
+            telefone: tel.FONE
+          }));
+        }
+
+        // Mapear Emails
+        if (data.EMAILS) {
+          seguradoDetalhes.emails = data.EMAILS.map((email:any) => ({
+            cod: email.COD,
+            email: email.EMAIL
+          }));
+        }
+
+        // Mapear Endereços
+        if (data.ENDERECOS) {
+          seguradoDetalhes.enderecos = data.ENDERECOS.map((endereco:any) => ({
+            cod: endereco.COD,
+            endereco: endereco.ENDERECO,
+            tipo: endereco.TIPO,
+            bairro: endereco.BAIRRO,
+            cidade: endereco.CIDADE,
+            uf: endereco.UF,
+            cep: endereco.CEP
+          }));
+        }
+
+        return seguradoDetalhes;
+      })
+    ); //Fim get
+  }//Fim getOne()
+
 }//Fim classe.
