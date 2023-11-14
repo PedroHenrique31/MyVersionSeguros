@@ -25,6 +25,7 @@ def testeLerUnico():
     print("FIMVIGOR: "+str(apolice.FIMVIGOR)+" mes: "+str(apolice.FIMVIGOR.month))
     print("COD: "+str(apolice.COD)+" Seguradora: "+apolice.SEGURADORA+" COD_PRODUTOR: "+
           str(apolice.COD_PRODUTOR)+" premio_liquido: "+str(apolice.premio_liquido))
+    print("COD_PRODUTOR: "+str(apolice.COD_PRODUTOR)+" nome: "+apolice.produtor.NOME)
 
 def testeExcluir():
     apolice=dao.readById(10036)

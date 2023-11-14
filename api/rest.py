@@ -47,7 +47,7 @@ class ApoliceSchema(SQLAlchemyAutoSchema):
     class Meta:
         model=dados_Apolice.apolice
         fields = ('COD','SEGURADORA','RAMO','INIVIGOR','FIMVIGOR','PRODUTO',
-                     'LINK_APOLICE','COD_PRODUTOR','NOME_PROD','COD_SEGURADO','premio_liquido',
+                     'LINK_APOLICE','COD_PRODUTOR','PRODUTOR_NOME','COD_SEGURADO','premio_liquido',
                      'premio_total')
 
 """
@@ -123,6 +123,9 @@ class ApoliceRest(Resource):
             obj=dados_Apolice.readByID(id_apolice)
             schema=ApoliceSchema() # cria um schema com a tabela apolice
             algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num dicionario
+            cod_produtor=algo['COD_PRODUTOR']
+            nome_produtor=obj.produtor.NOME
+            algo['PRODUTOR']={'cod_produtor':cod_produtor,'nome':nome_produtor}
             return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
         ## Se a solicitação passar como argumento algum campo conhecido de pesquisa.
         elif request.args.get("MESVENCIMENTO") is not None:
