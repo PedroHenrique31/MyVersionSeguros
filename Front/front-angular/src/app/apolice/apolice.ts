@@ -10,4 +10,8 @@ export interface Apolice{
     premioTotal:number,
     cod_segurado:number,
     cod_produtor:number
+} 
+export interface ApoliceDetalhada extends Apolice{
+    nomeProdutor:string,
+    nomeSegurado:string
 }

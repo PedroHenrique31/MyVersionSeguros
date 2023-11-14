@@ -29,4 +29,11 @@ export class SeguradoService {
           Obs:item.OBSERVACAO
         }))} ));
    }// Fim getAll
+
+   getOne(cod:number):Observable<Segurado>{
+    let urlFinal=this.url+"?COD="+cod;
+    return this._http.get<Segurado>(urlFinal);
+
+    //Acessa o banco e retorna um segurado;
+   }
 }//Fim classe.

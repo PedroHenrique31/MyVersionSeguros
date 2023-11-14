@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Segurado } from './segurado';
+import { Segurado } from '../segurado/segurado';
 import { SeguradoService } from '../services/segurado-service.service';
 
 @Component({

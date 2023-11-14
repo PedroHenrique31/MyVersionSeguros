@@ -28,7 +28,8 @@ class Apolice:
         return apolices
     def readByID(self,id):
         apolice = self.ses.query(self.apolice).filter_by(COD=id).\
-            join(self.produtor,onclause=self.apolice.COD_PRODUTOR==self.produtor.COD).first()
+            join(self.produtor,onclause=self.apolice.COD_PRODUTOR==self.produtor.COD).\
+            join(self.segurado,onclause=self.apolice.COD_SEGURADO==self.segurado.COD).first()
         return apolice
     def create(self,apolice):
         self.ses.add(apolice)

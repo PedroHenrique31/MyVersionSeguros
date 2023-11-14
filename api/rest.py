@@ -123,9 +123,11 @@ class ApoliceRest(Resource):
             obj=dados_Apolice.readByID(id_apolice)
             schema=ApoliceSchema() # cria um schema com a tabela apolice
             algo=schema.dump(obj) # converte o obj consultado em um troço, provavelmente num dicionario
-            cod_produtor=algo['COD_PRODUTOR']
+            #cod_produtor=algo['COD_PRODUTOR']
             nome_produtor=obj.produtor.NOME
-            algo['PRODUTOR']={'cod_produtor':cod_produtor,'nome':nome_produtor}
+            nome_segurado=obj.segurado.NOME
+            algo['PRODUTOR_NOME']=nome_produtor
+            algo['SEGURADO_NOME']=nome_segurado
             return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
         ## Se a solicitação passar como argumento algum campo conhecido de pesquisa.
         elif request.args.get("MESVENCIMENTO") is not None:

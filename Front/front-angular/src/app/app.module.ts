@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ApoliceDetailComponent } from './apolice-detail/apolice-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SeguradoDetailComponent } from './segurado-detail/segurado-detail.component';
 //import { PDFViewerModule } from 'ngx-extended-pdf-viewer';
 //import { VisualizarPdfComponent } from './visualizar-pdf-component/visualizar-pdf-component.component';
 
@@ -26,6 +27,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SeguradoComponent,
     ApoliceDetailComponent,
     DashboardComponent,
+    SeguradoDetailComponent,
   ],
   imports: [
     BrowserModule,

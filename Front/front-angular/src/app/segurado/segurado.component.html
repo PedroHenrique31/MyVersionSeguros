@@ -1,17 +1,20 @@
 <p>segurado works!</p>
 
-
-<p>
-    {{segurados[0].COD}} <br>
-    {{segurados[0].NOME}} <br>
-    {{segurados[0].dataNascimento}} <br>
-    {{segurados[0].renda}} <br>
-</p>
 <!-- Cria uma lista desordenada com os nomes e CODs dos funcionarios -->
-<ul>
-    Lista de apólices:
-    <li *ngFor="let item of segurados">
-           {{item.COD }} - {{item.NOME}} - {{item.dataNascimento | date:'dd/MM/yyyy' }} - {{item.renda}} - {{item.empresa}}
-        </li>
-    </ul>
+<div>
+<table>
+    <caption>
+    <strong>Segurados</strong></caption>
     
+    
+    <th>Nome</th>
+    <th>Profissão - empresa</th>
+    
+    <tr *ngFor="let item of segurados">
+        <td>{{item.NOME}}</td>
+        <td>{{item.profissao}} - {{item.empresa}}</td>
+        <td><a routerLink="/segurado/{{item.COD}}">detalhes</a></td>
+    </tr>
+</table>
+</div>
+<div> <h3>Colocar algo aqui</h3> </div>
