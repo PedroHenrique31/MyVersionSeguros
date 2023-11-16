@@ -13,13 +13,14 @@ export class ApoliceComponent {
   apolices:Apolice[]=[];
   //apoliceEspecifica:Apolice;
   apoliceSelecionada=false;
+  dataHoje:Date=new Date(2023,11,16);
   mes=11;
 
   constructor(private apoliceAPI:ApoliceService){
-    //this.apoliceEspecifica=new Apol();
+    this.dataHoje=new Date();
+    this.mes=this.dataHoje.getMonth()+1;
     this.getApolicesMes(this.mes);
-    //this.getApoliceEspecifica(5);
-    //this.getTodasApolices();
+    
     
   }
 
