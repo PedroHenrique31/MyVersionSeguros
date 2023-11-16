@@ -31,7 +31,24 @@ export class SeguradoService {
         }))} ));
    }// Fim getAll
 
-
+   getByName(nome:string):Observable<Segurado[]>{
+    
+    let urlFinal=this.url+"?NOME="+nome;
+    return this._http.get<Segurado[]>(urlFinal).pipe(map(//mapeia os valores do array de any, para Segurado.
+    (dado:any[])=>{
+      return dado.map(
+      item => ({//atribui um valor para cada objeto typescript como um valor do JSON
+      COD:item.COD,
+      NOME:item.NOME,
+      CPF:item.CPF,
+      RG:item.RG,
+      profissao:item.PROFISSAO,
+      empresa:item.EMPRESA,
+      renda:parseFloat(item.RENDA),
+      dataNascimento:new Date(item.DATA_NASCIMENTO),
+      Obs:item.OBSERVACAO
+    }))} ));
+   }
 
   getOne(cod: number): Observable<SeguradoDetalhes> {
     console.log("Chamou a função getOne");

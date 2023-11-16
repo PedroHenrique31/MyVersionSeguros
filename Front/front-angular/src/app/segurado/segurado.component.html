@@ -1,26 +1,48 @@
 <p>segurado em desenvolvimento!</p>
 <!-- Cria um campo de pesquisa de segurado -->
 <label>Pesquise por uma segurado pelo nome</label>
-<form>
-  <input type="text" name="nomePesquisaSegurado" />
+<form (ngSubmit)="pesquisaSeguradoPorNome()">
+  <input type="text" name="nomePesquisaSegurado" [(ngModel)]="nomePesquisa"/>
   <input type="submit" value="Pesquisar" />
 </form>
 
 <!-- Cria uma lista desordenada com os nomes e CODs dos funcionarios -->
-<div>
-<table>
-    <caption>
-    <strong>Segurados</strong></caption>
-    
-    
-    <th>Nome</th>
-    <th>Profissão - empresa</th>
-    
-    <tr *ngFor="let item of segurados">
-        <td>{{item.NOME}}</td>
-        <td>{{item.profissao}} - {{item.empresa}}</td>
-        <td><a routerLink="/segurado/{{item.COD}}">detalhes</a></td>
-    </tr>
-</table>
+<div *ngIf="!feitaPesquisa;then trueBlock else elseBloco">
+ 
 </div>
+
+<ng-template #trueBlock>
+  <table>
+      <caption>
+      <strong>Segurados</strong></caption>
+      
+      
+      <th>Nome</th>
+      <th>Profissão - empresa</th>
+      
+      <tr *ngFor="let item of segurados">
+          <td>{{item.NOME}}</td>
+          <td>{{item.profissao}} - {{item.empresa}}</td>
+          <td><a routerLink="/segurado/{{item.COD}}">detalhes</a></td>
+      </tr>
+  </table>
+  </ng-template>
+
+  <ng-template #elseBloco>
+    <table>
+      <caption>
+      <strong>Segurados</strong></caption>
+      
+      
+      <th>Nome</th>
+      <th>Profissão - empresa</th>
+      
+      <tr *ngFor="let item of segurados">
+          <td>{{item.NOME}}</td>
+          <td>{{item.profissao}} - {{item.empresa}}</td>
+          <td><a routerLink="/segurado/{{item.COD}}">detalhes</a></td>
+      </tr>
+  </table>
+   </ng-template>
+
 <div> <h3>Colocar algo aqui</h3> </div>
