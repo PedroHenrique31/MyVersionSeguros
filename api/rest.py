@@ -197,15 +197,18 @@ class SeguradoRest(Resource):
             tels=dados_Segurado.readTelefone(id_segurado)
             OBJemails=dados_Segurado.readEmail(id_segurado)
             OBJenderecos=dados_Segurado.readEnderecos(id_segurado)
+            OBJapolices=dados_Segurado.readApolice(id_segurado)
             # Processa as informações
             telefones=[{"DDD":tel.DDD,"FONE":tel.TELEFONE} for tel in tels]
             emails=[{"COD":e.COD,"EMAIL":e.EMAIL} for e in OBJemails]
             enderecos=[{"COD":end.COD,"ENDERECO":end.ENDERECO,"TIPO":end.TIPO,"BAIRRO":end.BAIRRO,
                             "CIDADE":end.CIDADE,"UF":end.UF,"CEP":end.CEP} for end in OBJenderecos]
+            apolices=[{"COD":ap.COD,"SEGURADORA":ap.SEGURADORA,"RAMO":ap.RAMO,"PREMIO_LIQUIDO":ap.premio_liquido} for ap in OBJapolices]
             # Adiciona os telefones, emails e endereços
             algo["TELEFONES"]=telefones
             algo["EMAILS"]=emails
             algo["ENDERECOS"]=enderecos
+            algo["APOLICES"]=apolices
             return jsonify(algo) # gera um json a partir de algo e envia de volta, encerrando a função.
         ## Se a solicitação passar como argumento algum campo conhecido de pesquisa.
         elif request.args.get("NOME") is not None:

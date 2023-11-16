@@ -19,7 +19,7 @@ class Segurado:
         self.endereco = DB.classes.endereco
         self.telefone = DB.classes.telefone
         self.email = DB.classes.email
-        #Não sei se adiciono uma tabela de apolices.
+        self.apolice= DB.classes.apolice
 
         session_factory = sessionmaker(bind=engine)
         self.ses = session_factory()
@@ -31,6 +31,10 @@ class Segurado:
     def readTelefone(self,id_segurado):
         telefones=self.ses.query(self.telefone).filter_by(COD_SEGURADO=id_segurado).all()
         return telefones
+    #Lista apolices de um determinado segurado
+    def readApolice(self,id_segurado):
+        consulta=self.ses.query(self.apolice).filter_by(COD_SEGURADO=id_segurado).all()
+        return consulta
     # Lista endereços de um determinado segurado
     def readEnderecos(self,id_segurado):
         enderecos=self.ses.query(self.endereco).filter_by(COD_SEGURADO=id_segurado)

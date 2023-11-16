@@ -18,5 +18,8 @@ export class SeguradoComponent {
       (x)=>(this.segurados=x));
   }
 
+  getSeguradoByNome(nome:string):void{
+    //chama this.seguradoAPI.getByName()
+  }
 
 }
