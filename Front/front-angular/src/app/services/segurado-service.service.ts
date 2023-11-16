@@ -51,7 +51,7 @@ export class SeguradoService {
    }
 
   getOne(cod: number): Observable<SeguradoDetalhes> {
-    console.log("Chamou a função getOne");
+    //console.log("Chamou a função getOne");
     let urlFinal = this.url + "?COD=" + cod;
     return this._http.get<any>(urlFinal).pipe(
       map(data => {
@@ -68,7 +68,7 @@ export class SeguradoService {
 
         // Mapear Telefones
         if (data.TELEFONES) {
-          console.log("entrou nesse if telefones em getOne");
+          //console.log("entrou nesse if telefones em getOne");
           seguradoDetalhes.telefones = data.TELEFONES.map((tel:any) => ({
             DDD: tel.DDD,
             telefone: tel.FONE
@@ -77,7 +77,7 @@ export class SeguradoService {
 
         // Mapear Emails
         if (data.EMAILS) {
-          console.log("entrou nesse if emails em getOne");
+          //console.log("entrou nesse if emails em getOne");
           seguradoDetalhes.emails = data.EMAILS.map((email:any) => ({
             cod: email.COD,
             email: email.EMAIL
@@ -86,7 +86,7 @@ export class SeguradoService {
 
         // Mapear Endereços
         if (data.ENDERECOS) {
-          console.log("entrou nesse if enderecos em getOne");
+          //console.log("entrou nesse if enderecos em getOne");
           seguradoDetalhes.enderecos = data.ENDERECOS.map((endereco:any) => ({
             cod: endereco.COD,
             endereco: endereco.ENDERECO,
@@ -100,7 +100,7 @@ export class SeguradoService {
 
         //Mapear apolices
         if(data.APOLICES){
-          console.log("entrou nesse if apolices em getOne");
+          //console.log("entrou nesse if apolices em getOne");
           seguradoDetalhes.apolices = data.APOLICES.map(
             (apolice:any) =>({
               cod:apolice.COD,
@@ -110,9 +110,9 @@ export class SeguradoService {
             }));
         }
 
-        console.log("telefones em getOne: "+seguradoDetalhes.telefones.length);
-        console.log("enderecos em getOne: "+seguradoDetalhes.enderecos.length);
-        console.log("emails em getOne: "+seguradoDetalhes.emails.length);
+        //console.log("telefones em getOne: "+seguradoDetalhes.telefones.length);
+        //console.log("enderecos em getOne: "+seguradoDetalhes.enderecos.length);
+        //console.log("emails em getOne: "+seguradoDetalhes.emails.length);
         
         //TODO: Fazer algo aqui para só retornar resultado quando tiver os dados todos preenchidos.
         return seguradoDetalhes;

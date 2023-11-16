@@ -21,12 +21,10 @@ export class SeguradoComponent {
   }
 
   pesquisaSeguradoPorNome(){
-    console.log("chamou pesquisaSeguradoPorNome");
+    //console.log("chamou pesquisaSeguradoPorNome");
     this.seguradoAPI.getByName(this.nomePesquisa).subscribe((a)=>(this.segurados=a));
     this.feitaPesquisa=true;
   }
-  getSeguradoByNome(nome:string):void{
-    //chama this.seguradoAPI.getByName()
-  }
+ 
 
 }
