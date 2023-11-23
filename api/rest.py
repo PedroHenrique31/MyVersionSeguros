@@ -24,6 +24,7 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from DAO.ProdutorDAO import ProdutorDAO # Importamos o pacote e pacote do pacote após isso o arquivo ProdutorDAO
 from DAO.SeguradoDAO import DAOSegurado
 from DAO.ApoliceDAO import DAOApolice
+from datetime import datetime
 
 # Cria classes de acesso ao BD, para manipular as tabelas de produtor,segurado e apolices.
 dados_Produtor=ProdutorDAO.Produtor()
@@ -226,8 +227,17 @@ class SeguradoRest(Resource):
     def post(self):
         obj=dados_Segurado.segurado() # cria um objeto do tipo segurado
         for c in self.campos:
-            if c!='COD':
+            if c!='COD' and c!='DATA_NASCIMENTO':
                 exec("obj.{}=request.args.get('{}')".format(c,c))
+            """
+            obj.NOME=request.args.get(NOME)
+            obj.CPF = request.args.get(CPF)
+            obj.RG = request.args.get(RG)
+            obj.PROFISSAO = request.args.get(PROFISSAO)
+            obj.EMPRESA = request.args.get(EMPRESA)
+            obj.RENDA = request.args.get(RENDA)
+            obj.OBSERVACAO = request.args.get(OBSERVACAO)"""
+        obj.DATA_NASCIMENTO = datetime.strptime(request.args.get('DATA_NASCIMENTO'),'%Y-%m-%d').date()
         dados_Segurado.create(obj)
         return jsonify({'insert':obj.COD})
 
@@ -238,10 +248,11 @@ class SeguradoRest(Resource):
             return jsonify({'update':0})
         else:
             for c in self.campos:
-                if request.args.get(c) is not None:
+                if request.args.get(c) is not None and c!='COD':
+                    print("nome campo: "+c)
                     exec('obj.{}=request.args.get("{}")'.format(c, c))
-                    dados_Segurado.update()
-                    return jsonify({'update':obj.COD})
+            dados_Segurado.update()
+            return jsonify({'update':obj.COD})
 
     # Exclui dados no BD.
     def delete(self):
