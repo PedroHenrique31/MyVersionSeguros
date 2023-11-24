@@ -11,3 +11,4 @@ está colocado em pdf aqui.
 - 4.1.  Verificar quais funções de pesquisa do dashboard precisam de uma função correspondente na API(receita total é um caso). 
 5. Implementar todas as demais funções de REST, com os verbos POST,PUT,DELETE.
 6. Adicionar estilos com CSS.
+7. Amanhã adicionarei a rota para pagina de criação de segurado e trabalharei nela;

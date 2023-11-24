@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule} from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
 import { MatCommonModule } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -38,7 +39,8 @@ import { NovoSeguradoComponent } from './novo-segurado/novo-segurado.component';
     BrowserAnimationsModule,
     FormsModule,
     MatTableModule,
-    MatCommonModule
+    MatCommonModule,
+    MatButtonModule
     
   ],
   providers: [],
