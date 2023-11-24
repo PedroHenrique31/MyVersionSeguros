@@ -229,21 +229,17 @@ class SeguradoRest(Resource):
         for c in self.campos:
             if c!='COD' and c!='DATA_NASCIMENTO':
                 exec("obj.{}=request.args.get('{}')".format(c,c))
-            """
-            obj.NOME=request.args.get(NOME)
-            obj.CPF = request.args.get(CPF)
-            obj.RG = request.args.get(RG)
-            obj.PROFISSAO = request.args.get(PROFISSAO)
-            obj.EMPRESA = request.args.get(EMPRESA)
-            obj.RENDA = request.args.get(RENDA)
-            obj.OBSERVACAO = request.args.get(OBSERVACAO)"""
+
         obj.DATA_NASCIMENTO = datetime.strptime(request.args.get('DATA_NASCIMENTO'),'%Y-%m-%d').date()
         dados_Segurado.create(obj)
+        # Tratar aqui o que fazer quando tiverem telefones de contato e outras coisas no segurado
         return jsonify({'insert':obj.COD})
 
     # Atualiza dados no BD.
     def put(self):
+        print(str(request.args.get(self.campos[0])))
         obj = dados_Segurado.readByID(request.args.get(self.campos[0]))
+        print(obj)
         if obj is None:
             return jsonify({'update':0})
         else:
