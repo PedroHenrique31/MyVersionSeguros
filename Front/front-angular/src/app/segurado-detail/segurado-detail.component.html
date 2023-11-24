@@ -1,0 +1,74 @@
+<p>segurado-detail works!</p>
+
+
+<div *ngIf="segurado">
+    Conseguimos buscar dados!<br>
+    <form>
+    <fieldset>
+        <h4>Dados pessoais</h4>
+        <label>Nome: </label>
+        <input type="text" name="Nome:" value="{{segurado.NOME}}">
+        <label>CPF: </label>
+        <input type="text" name="CPF:" value="{{segurado.CPF}}">
+        <label>RG: </label>
+        <input type="text" name="RG:" value="{{segurado.RG}}">
+        <label>Data de nascimento: </label>
+        <input type="date" name="Data_nascimento:" value="{{segurado.dataNascimento | date:'dd/MM/yyyy'}}">
+    </fieldset>
+    <br>
+    <fieldset>
+        <h4>Dados de contato</h4>
+        <div *ngIf="segurado.telefones">
+        <!-- Só entra aqui que a lista de telefones não for vazia -->
+        <span *ngFor="let tel of segurado.telefones">
+            <div>({{tel.DDD}}) {{tel.telefone}} <button>Apagar</button></div>
+        </span></div>
+
+        <div *ngIf="segurado.enderecos">
+        <!-- Só entra aqui que a lista de endereços não for vazia -->
+            <span *ngFor="let tel of segurado.enderecos">
+            <div>
+                <div>{{tel.endereco}}</div>
+                <div>{{tel.bairro}} - {{tel.cidade}},{{tel.uf}}</div>
+                <button>Apagar</button>
+            </div>
+            </span>
+        </div>
+
+        <div *ngIf="segurado.emails">
+        <!-- Só entra aqui que a lista de e-mails não for vazia -->
+            <span *ngFor="let tel of segurado.emails">
+                <div> {{tel.email}} </div>
+            </span>
+        </div>
+
+    </fieldset>
+    <fieldset>
+        <h4>Dados profissão</h4>
+        <div>{{segurado.profissao}} - {{segurado.empresa}} - {{segurado.renda}}
+        </div>
+    </fieldset><br>
+
+    <fieldset>
+        <h4>Informações de apolices</h4>
+        <div *ngIf="segurado.apolices">
+            <div *ngFor="let seg of segurado.apolices">
+                {{seg.seguradora}} - {{seg.ramo}} - {{seg.premioLiquido}}
+            </div>
+        </div>
+    </fieldset>
+    <h4>Observações a cerca do segurado</h4>
+    <!-- Depois vejo como botar uma mensagem nessa área -->
+    <textarea name="comentario" cols="50" rows="10">
+
+        {{ segurado.Obs}}
+    </textarea>
+
+    <fieldset>
+        <button>Editar</button>
+        <button>Remover</button>
+    </fieldset>
+    </form>
+
+   
+</div>

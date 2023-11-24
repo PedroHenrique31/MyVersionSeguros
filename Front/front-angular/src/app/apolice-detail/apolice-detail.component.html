@@ -1,0 +1,30 @@
+<p>apolice-detail works!</p>
+
+<!--Se tiver alguma apolice mostra aqui-->
+<div *ngIf="apolice">
+    <h2> Dados da apólice </h2>
+        <!-- TODO:Depois tentar com o form-->
+    <form>
+
+    Código da apólice:{{apolice.COD}}
+    <fieldset>
+    <label>algum titulo</label>
+    Produtor:{{apolice.nomeProdutor}}
+    Segurado:<a routerLink="/segurado/{{apolice.cod_segurado}}">{{apolice.nomeSegurado}}</a>
+    </fieldset>
+    <fieldset>
+    Seguradora:{{apolice.seguradora}} Ramo:{{apolice.ramo}}<br>
+    Vigência início:{{apolice.inivigor | date:'dd/MM/yyyy'}}
+    Vigência fim:{{apolice.fimvigor | date:'dd/MM/yyyy'}}<br>
+    Prêmio líquido:{{apolice.premioLiquido}}
+    Prêmio total:{{apolice.premioTotal}}<br>
+    Bem segurado:{{apolice.produto}}
+    </fieldset>
+    <fieldset>
+    <button>Editar</button>
+    <button>Remover</button>
+    </fieldset>
+</form>
+    
+    <a [href]= "geraLink()" target="_blank"> Ver apolice </a><br>
+</div>
