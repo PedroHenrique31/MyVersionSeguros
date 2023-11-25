@@ -233,7 +233,7 @@ class SeguradoRest(Resource):
             return jsonify({'error': 'Conteúdo da requisição deve ser JSON'}), 400
         obj=dados_Segurado.segurado() # cria um objeto do tipo segurado
         for c in self.campos:
-            if c!='COD' and c!='DATA_NASCIMENTO' and c!='TELEFONES':
+            if c!='COD' and c!='DATA_NASCIMENTO' and c!='TELEFONES' and c!='ENDERECOS' and c!='EMAILS':
                 exec("obj.{}=data['{}']".format(c,c))
 
         obj.DATA_NASCIMENTO = datetime.strptime(data['DATA_NASCIMENTO'],'%Y-%m-%d').date()
@@ -271,16 +271,30 @@ class SeguradoRest(Resource):
 
     # Atualiza dados no BD.
     def put(self):
-        print(str(request.args.get(self.campos[0])))
-        obj = dados_Segurado.readByID(request.args.get(self.campos[0]))
-        print(obj)
+        dadosDicionario=request.get_json() #Pega um JSON e passa pra dict
+        if dadosDicionario is None:
+            return jsonify({'update': 0})
+
+        print(dadosDicionario)
+        obj = dados_Segurado.readByID(dadosDicionario['COD'])
+        #print(obj.COD)
         if obj is None:
             return jsonify({'update':0})
         else:
-            for c in self.campos:
-                if request.args.get(c) is not None and c!='COD':
-                    print("nome campo: "+c)
-                    exec('obj.{}=request.args.get("{}")'.format(c, c))
+            # Para cada campo da lista de segurados realiza uma alteração no campo de mesmo nome
+            for c in dadosDicionario:
+                if c!='COD' and c!='EMAILS':
+                    exec("obj.{}=dadosDicionario['{}']".format(c,c))
+            # Procura no JSON se há os campos EMAILS,ENDERECOS,TELEFONES e adiciona-os
+            if 'EMAILS' in dadosDicionario:
+                for e in dadosDicionario['EMAILS']:
+                    print("Tem alteração no email"+e['EMAIL'])
+            if 'TELEFONES' in dadosDicionario:
+                for e in dadosDicionario['TELEFONES']:
+                    print("Telefone: "+"("+e['DDD']+")"+e['TELEFONE'])
+            if 'ENDERECOS' in dadosDicionario:
+                for e in dadosDicionario:
+                    print("Endereço: "+e['ENDERECO'])
             dados_Segurado.update()
             return jsonify({'update':obj.COD})
 
