@@ -54,6 +54,17 @@ class Segurado:
     def create(self,segurado):
         self.ses.add(segurado)
         self.ses.commit()
+    #Adiciona os dados de outras tabelas
+    def createTelefone(self,telefone):
+        self.ses.add(telefone)
+        self.ses.commit()
+    def createEndereco(self,endreceo):
+        self.ses.add(endreceo)
+        self.ses.commit()
+    def createEmail(self,email):
+        self.ses.add(email)
+        self.ses.commit()
+    #Altera dados de segurado
     def update(self):
         self.ses.commit()
     def delete(self,segurado):

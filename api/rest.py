@@ -227,18 +227,46 @@ class SeguradoRest(Resource):
     def post(self):
         # Verifica se o conteúdo da requisição é JSON
         if request.is_json:
-            data = request.get_json()
-
+            data = request.get_json() #Passa o JSON para dict
+            #print(data['TELEFONES'])
         else:
             return jsonify({'error': 'Conteúdo da requisição deve ser JSON'}), 400
         obj=dados_Segurado.segurado() # cria um objeto do tipo segurado
         for c in self.campos:
             if c!='COD' and c!='DATA_NASCIMENTO' and c!='TELEFONES':
-                exec("obj.{}=request.args.get('{}')".format(c,c))
+                exec("obj.{}=data['{}']".format(c,c))
 
-        obj.DATA_NASCIMENTO = datetime.strptime(request.args.get('DATA_NASCIMENTO'),'%Y-%m-%d').date()
+        obj.DATA_NASCIMENTO = datetime.strptime(data['DATA_NASCIMENTO'],'%Y-%m-%d').date()
         dados_Segurado.create(obj)
         # Tratar aqui o que fazer quando tiverem telefones de contato e outras coisas no segurado
+        ## Como eu não criei uma lista com os nomes dos campos eu tenho que atribuir manualmente.
+        if 'TELEFONES' in data:
+            for x in data['TELEFONES']:
+                #print("("+x['DDD']+")"+x['TELEFONE'])
+                telefone=dados_Segurado.telefone()
+                telefone.DDD=x['DDD']
+                telefone.TELEFONE=x['TELEFONE']
+                telefone.COD_SEGURADO=obj.COD
+                #agora é dar create em telefone
+                dados_Segurado.createTelefone(telefone)
+        if 'ENDERECOS' in data:
+            for x in data['ENDERECOS']:
+                endereco=dados_Segurado.endereco()
+                endereco.ENDERECO=x['ENDERECO']
+                endereco.TIPO=x['TIPO']
+                endereco.BAIRRO=x['BAIRRO']
+                endereco.CIDADE=x['CIDADE']
+                endereco.UF=x['UF']
+                endereco.CEP=x['CEP']
+                endereco.COD_SEGURADO=obj.COD
+                dados_Segurado.createEndereco(endereco)
+
+        if 'EMAILS' in data:
+            for x in data['EMAILS']:
+                email=dados_Segurado.email()
+                email.EMAIL=x['EMAIL']
+                email.COD_SEGURADO=obj.COD
+                dados_Segurado.createEmail(email)
         return jsonify({'insert':obj.COD})
 
     # Atualiza dados no BD.
