@@ -225,9 +225,15 @@ class SeguradoRest(Resource):
 
     # Cria um novo elemento no BD.
     def post(self):
+        # Verifica se o conteúdo da requisição é JSON
+        if request.is_json:
+            data = request.get_json()
+
+        else:
+            return jsonify({'error': 'Conteúdo da requisição deve ser JSON'}), 400
         obj=dados_Segurado.segurado() # cria um objeto do tipo segurado
         for c in self.campos:
-            if c!='COD' and c!='DATA_NASCIMENTO':
+            if c!='COD' and c!='DATA_NASCIMENTO' and c!='TELEFONES':
                 exec("obj.{}=request.args.get('{}')".format(c,c))
 
         obj.DATA_NASCIMENTO = datetime.strptime(request.args.get('DATA_NASCIMENTO'),'%Y-%m-%d').date()
