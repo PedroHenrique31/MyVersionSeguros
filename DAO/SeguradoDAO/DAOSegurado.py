@@ -47,6 +47,9 @@ class Segurado:
     def readAll(self):
         segurados=self.ses.query(self.segurado).limit(200).all()
         return segurados
+    def pegaEmail(self,id_email):
+        email=self.ses.query(self.email).filter_by(COD=id_email).first()
+        return email
     # Acessa um segurado pelo seu ID
     def readByID(self,id):
         segurado= self.ses.query(self.segurado).filter_by(COD=id).first()

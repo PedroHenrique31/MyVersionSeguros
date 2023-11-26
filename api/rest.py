@@ -272,12 +272,14 @@ class SeguradoRest(Resource):
     # Atualiza dados no BD.
     def put(self):
         dadosDicionario=request.get_json() #Pega um JSON e passa pra dict
+
         if dadosDicionario is None:
             return jsonify({'update': 0})
 
         print(dadosDicionario)
         obj = dados_Segurado.readByID(dadosDicionario['COD'])
         #print(obj.COD)
+        # se não encontrar o segurado na tabela encerra aqui
         if obj is None:
             return jsonify({'update':0})
         else:
@@ -285,10 +287,26 @@ class SeguradoRest(Resource):
             for c in dadosDicionario:
                 if c!='COD' and c!='EMAILS':
                     exec("obj.{}=dadosDicionario['{}']".format(c,c))
-            # Procura no JSON se há os campos EMAILS,ENDERECOS,TELEFONES e adiciona-os
+            # Procura no JSON se há os campos EMAILS,ENDERECOS,TELEFONES e altera-os nas tabelas
             if 'EMAILS' in dadosDicionario:
+                # Para cada email em EMAILS
                 for e in dadosDicionario['EMAILS']:
-                    print("Tem alteração no email"+e['EMAIL'])
+                    # Se o comando for para alteração de um email específico ele deve informar o codigo do email
+                    if 'CODIGO_EMAIL_ALTERAR' in e:
+                        print("Altera um email especifico de COD:" + str(e['CODIGO_EMAIL_ALTERAR']) +" e tipo: "+str(type(e['CODIGO_EMAIL_ALTERAR'])))
+                        id_email=e['CODIGO_EMAIL_ALTERAR']
+                        emailEspecifico=dados_Segurado.pegaEmail(id_email)
+                        emailEspecifico.EMAIL=e['EMAIL']
+
+                    elif 'CODIGO_EMAIL_DELETAR' in e:
+                        print("Deletaremos o e-mail de PK:"+str(e['CODIGO_EMAIL_DELETAR']))
+                    else:
+                        #Senão adiciona o email na tabela EMAILS
+                        print("Tem que adicionar o email"+e['EMAIL'])
+                        email=dados_Segurado.email()
+                        email.EMAIL=e['EMAIL']
+                        email.COD_SEGURADO=obj.COD
+                        dados_Segurado.createEmail(email)
             if 'TELEFONES' in dadosDicionario:
                 for e in dadosDicionario['TELEFONES']:
                     print("Telefone: "+"("+e['DDD']+")"+e['TELEFONE'])
