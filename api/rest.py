@@ -329,7 +329,11 @@ class SeguradoRest(Resource):
                 camposEndereco=['ENDERECO','TIPO','BAIRRO','CIDADE','UF','CEP']
                 for ende in dadosDicionario['ENDERECOS']:
                     if 'CODIGO_ENDERECO_ALTERAR' in ende:
-                        pass
+                        id_endereco=ende['CODIGO_ENDERECO_ALTERAR']
+                        enderecoEspecifico=dados_Segurado.pegaEndereco(id_endereco)
+                        for camp in camposEndereco:
+                            exec("enderecoEspecifico.{}=ende['{}']".format(camp,camp))
+                        enderecoEspecifico.COD_SEGURADO=obj.COD
                     elif 'CODIGO_ENDERECO_DELETAR' in ende:
                         pass
                     else:
