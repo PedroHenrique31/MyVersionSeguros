@@ -5,7 +5,7 @@
   <input type="text" name="nomePesquisaSegurado" [(ngModel)]="nomePesquisa"/>
   <input type="submit" value="Pesquisar" />
 </form>
-<button>Novo segurado</button>
+<button (click)="navegarParaNovoSegurado()">Novo segurado</button>
 
 <!-- Cria uma lista desordenada com os nomes e CODs dos funcionarios -->
 <div *ngIf="!feitaPesquisa;then trueBlock else elseBloco">

@@ -11,6 +11,7 @@ import { ApoliceComponent } from "./apolice/apolice.component";
 import { ApoliceDetailComponent } from "./apolice-detail/apolice-detail.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { SeguradoDetailComponent } from './segurado-detail/segurado-detail.component';
+import { NovoSeguradoComponent } from './novo-segurado/novo-segurado.component';
 
 const routes: Routes=[
     {path:'',component:AppComponent},
@@ -19,7 +20,8 @@ const routes: Routes=[
     {path:'segurado',component:SeguradoComponent},
     {path:'apolices',component:ApoliceComponent},
     {path:'apolices/:COD',component:ApoliceDetailComponent},
-    {path:'segurado/:COD',component:SeguradoDetailComponent}
+    {path:'segurado/:COD',component:SeguradoDetailComponent},
+    {path:'segurado/novo/novo_segurado',component:NovoSeguradoComponent}
     //{ path: 'visualizar-pdf', component: VisualizarPdfComponent }
 ];
 

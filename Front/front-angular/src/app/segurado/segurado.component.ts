@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Segurado } from '../segurado/segurado';
 import { SeguradoService } from '../services/segurado-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-segurado',
@@ -12,7 +13,7 @@ export class SeguradoComponent {
   nomePesquisa:string='';
   feitaPesquisa:boolean=false;
 
-  constructor(private seguradoAPI:SeguradoService){
+  constructor(private seguradoAPI:SeguradoService,private roteador:Router){
     this.getSeguradosTodos();
   }
   getSeguradosTodos():void{
@@ -25,6 +26,8 @@ export class SeguradoComponent {
     this.seguradoAPI.getByName(this.nomePesquisa).subscribe((a)=>(this.segurados=a));
     this.feitaPesquisa=true;
   }
- 
+ navegarParaNovoSegurado():void{
+    this.roteador.navigate(['segurado/novo/novo_segurado']);
+ }
 
 }
