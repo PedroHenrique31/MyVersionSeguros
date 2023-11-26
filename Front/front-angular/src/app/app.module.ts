@@ -5,6 +5,8 @@ import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { MatCommonModule } from '@angular/material/core';
 import { ActivatedRoute } from '@angular/router';
+//import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // import dos componentes que serão usados na aplicação em geral
 import { AppComponent } from './app.component';
@@ -40,7 +42,8 @@ import { NovoSeguradoComponent } from './novo-segurado/novo-segurado.component';
     FormsModule,
     MatTableModule,
     MatCommonModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
     
   ],
   providers: [],
