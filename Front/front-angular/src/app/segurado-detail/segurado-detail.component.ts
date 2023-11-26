@@ -26,6 +26,11 @@ export class SeguradoDetailComponent {
     });
    
   }//fimGetSegurado
+  editarSegurado(){
+    let seg: SeguradoDetalhes= new SeguradoDetalhes();
+    console.log("Vamos chamar a função de edição");
+    this.seguradoService.alteraSegurado(seg);
+  }
 
 
 }

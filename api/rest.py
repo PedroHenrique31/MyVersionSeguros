@@ -200,7 +200,7 @@ class SeguradoRest(Resource):
             OBJenderecos=dados_Segurado.readEnderecos(id_segurado)
             OBJapolices=dados_Segurado.readApolice(id_segurado)
             # Processa as informações
-            telefones=[{"DDD":tel.DDD,"FONE":tel.TELEFONE} for tel in tels]
+            telefones=[{"DDD":tel.DDD,"FONE":tel.TELEFONE,"COD":tel.COD} for tel in tels]
             emails=[{"COD":e.COD,"EMAIL":e.EMAIL} for e in OBJemails]
             enderecos=[{"COD":end.COD,"ENDERECO":end.ENDERECO,"TIPO":end.TIPO,"BAIRRO":end.BAIRRO,
                             "CIDADE":end.CIDADE,"UF":end.UF,"CEP":end.CEP} for end in OBJenderecos]

@@ -71,7 +71,8 @@ export class SeguradoService {
           //console.log("entrou nesse if telefones em getOne");
           seguradoDetalhes.telefones = data.TELEFONES.map((tel:any) => ({
             DDD: tel.DDD,
-            telefone: tel.FONE
+            telefone: tel.FONE,
+            COD:tel.COD
           }));
         }
 
@@ -119,5 +120,11 @@ export class SeguradoService {
       })
     ); //Fim get
   }//Fim getOne()
+  novoSegurado(segurado:Segurado){
+
+  }
+  alteraSegurado(segurado:Segurado){
+    console.log("faz  PUT segurado aqui");
+  }
 
 }//Fim classe.

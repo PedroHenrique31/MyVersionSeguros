@@ -2,7 +2,8 @@ import { Segurado } from "../segurado/segurado";
 
 export interface Telefone{
     DDD:string,
-    telefone:string
+    telefone:string,
+    COD:number
 }
 export interface Email{
     cod:number,
