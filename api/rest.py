@@ -297,22 +297,50 @@ class SeguradoRest(Resource):
                         id_email=e['CODIGO_EMAIL_ALTERAR']
                         emailEspecifico=dados_Segurado.pegaEmail(id_email)
                         emailEspecifico.EMAIL=e['EMAIL']
-
+                    #Se o campo passado for de deletar:
                     elif 'CODIGO_EMAIL_DELETAR' in e:
                         print("Deletaremos o e-mail de PK:"+str(e['CODIGO_EMAIL_DELETAR']))
+                    #Senão insere um novo e-mail na tabela
                     else:
-                        #Senão adiciona o email na tabela EMAILS
+                        #adiciona o email na tabela EMAILS
                         print("Tem que adicionar o email"+e['EMAIL'])
                         email=dados_Segurado.email()
                         email.EMAIL=e['EMAIL']
                         email.COD_SEGURADO=obj.COD
                         dados_Segurado.createEmail(email)
             if 'TELEFONES' in dadosDicionario:
-                for e in dadosDicionario['TELEFONES']:
-                    print("Telefone: "+"("+e['DDD']+")"+e['TELEFONE'])
+                for tel in dadosDicionario['TELEFONES']:
+                    if 'CODIGO_TELEFONE_ALTERAR' in tel:
+                        id_telefone=tel['CODIGO_TELEFONE_ALTERAR']
+                        telEspecifico=dados_Segurado.pegaTelefone(id_telefone)
+                        telEspecifico.DDD=tel['DDD']
+                        telEspecifico.TELEFONE=tel['TELEFONE']
+                        telEspecifico.NOTAS=tel['NOTAS']
+                    elif 'CODIGO_TELEFONE_DELETAR' in tel:
+                        pass
+                    else:
+                        #Adiciona um telefone na tabela
+                        telefone=dados_Segurado.telefone()
+                        telefone.DDD=tel['DDD']
+                        telefone.TELEFONE=tel['TELEFONE']
+                        telefone.COD_SEGURADO=obj.COD
+                        dados_Segurado.createTelefone(telefone)
             if 'ENDERECOS' in dadosDicionario:
-                for e in dadosDicionario:
-                    print("Endereço: "+e['ENDERECO'])
+                camposEndereco=['ENDERECO','TIPO','BAIRRO','CIDADE','UF','CEP']
+                for ende in dadosDicionario['ENDERECOS']:
+                    if 'CODIGO_ENDERECO_ALTERAR' in ende:
+                        pass
+                    elif 'CODIGO_ENDERECO_DELETAR' in ende:
+                        pass
+                    else:
+                        # Adiciona um endereco na tabela
+                        endereco=dados_Segurado.endereco()
+                        for campo in camposEndereco:
+                            #print("endereco.{}=ende['{}']".format(campo,campo))
+                            exec("endereco.{}=ende['{}']".format(campo,campo))
+                        endereco.COD_SEGURADO=obj.COD
+                        dados_Segurado.createEndereco(endereco)
+
             dados_Segurado.update()
             return jsonify({'update':obj.COD})
 

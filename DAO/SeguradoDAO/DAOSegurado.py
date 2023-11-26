@@ -50,6 +50,12 @@ class Segurado:
     def pegaEmail(self,id_email):
         email=self.ses.query(self.email).filter_by(COD=id_email).first()
         return email
+    def pegaTelefone(self,id_tel):
+        telefone=self.ses.query(self.telefone).filter_by(COD=id_tel).first()
+        return telefone
+    def pegaEndereco(self,id_endereco):
+        end=self.ses.query(self.endereco).filter_by(COD=id_endereco).first()
+        return end
     # Acessa um segurado pelo seu ID
     def readByID(self,id):
         segurado= self.ses.query(self.segurado).filter_by(COD=id).first()
