@@ -351,12 +351,28 @@ class SeguradoRest(Resource):
     # Exclui dados no BD.
     def delete(self):
         id=request.args.get(self.campos[0])
+        id_telefone=request.args.get('TELEFONE')
+        id_endereco=request.args.get('ENDERECO')
+        id_email=request.args.get('EMAIL')
+
         obj = dados_Segurado.readByID(id)
-        if obj is None:
-            return jsonify({"delete":0})
-        else:
+        telefoneDel=dados_Segurado.pegaTelefone(id_telefone)
+        enderecoDel=dados_Segurado.pegaEndereco(id_endereco)
+        emailDel=dados_Segurado.pegaEmail(id_email)
+        if obj is not None:
             dados_Segurado.delete(obj)
             return jsonify({"delete":id})
+        elif telefoneDel is not None:
+            dados_Segurado.delete(telefoneDel)
+            return jsonify({"deleteTEL":id_telefone})
+        elif enderecoDel is not None:
+            dados_Segurado.delete(enderecoDel)
+            return jsonify({"deleteENDERECO": id_endereco})
+        elif emailDel is not None:
+            dados_Segurado.delete(emailDel)
+            return jsonify({"deleteTEL": id_email})
+        else:
+            return jsonify({"delete":0})
 
 class PDFHandler:
     def __init__(self):
